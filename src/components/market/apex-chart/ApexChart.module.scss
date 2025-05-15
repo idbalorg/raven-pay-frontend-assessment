@@ -1,0 +1,34 @@
+.chart-container {
+  background-color: #0d1117;
+  padding: 1rem;
+  border-radius: 10px;
+  color: #c9d1d9;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+}
+
+.chart-controls {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  label {
+    font-size: 0.9rem;
+    color: #8b949e;
+
+    select {
+      margin-left: 0.5rem;
+      padding: 0.3rem 0.5rem;
+      border-radius: 6px;
+      background: #161b22;
+      color: #c9d1d9;
+      border: 1px solid #30363d;
+    }
+  }
+}
+
+.error {
+  color: #ff4c4c;
+  margin-top: 0.5rem;
+}
