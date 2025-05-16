@@ -69,4 +69,8 @@ html {
   height: 100%;
   background-color: #32383f;
   font-family: "Satoshi", sans-serif;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
 }

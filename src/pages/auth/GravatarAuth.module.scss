@@ -1,0 +1,82 @@
+.container {
+  padding: 50px auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth {
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: #1e1e2f;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: #fff;
+  margin: 200px auto;
+
+  &__title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+
+  &__container {
+    pad: 16px;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #2a2a40;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+
+    &::placeholder {
+      color: #aaa;
+    }
+  }
+
+  &__button {
+    margin-top: 1.5rem;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(to right, #25c26e, #177f5b);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: linear-gradient(to right, #2ae57d, #1b9d6f);
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.25rem;
+    margin: 10rem 1rem;
+
+    &__title {
+      font-size: 1.25rem;
+    }
+
+    &__input {
+      font-size: 13px;
+    }
+
+    &__button {
+      font-size: 13px;
+      padding: 0.6rem 1.5rem;
+    }
+  }
+}

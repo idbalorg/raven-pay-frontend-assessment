@@ -1,9 +1,11 @@
 import md5 from "blueimp-md5";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import styles from "./GravatarProfile.module.scss";
 
 export default function GravatarProfile() {
   const location = useLocation();
+  const navigate = useNavigate();
   const email = location.state?.email || "";
 
   const [gravatarUrl, setGravatarUrl] = useState(null);
@@ -19,15 +21,15 @@ export default function GravatarProfile() {
       .then((res) => res.json())
       .then((data) => {
         const user = data.items?.[0];
-
         if (user) {
-          const userWithEmail = { ...user, email }; // include email
+          const userWithEmail = { ...user, email };
           setGithubUser(userWithEmail);
           localStorage.setItem("user", JSON.stringify(userWithEmail));
-          console.log("user details", userWithEmail);
         }
       });
   }, [email]);
+
+  const handleEnterApp = () => navigate("/app");
 
   if (!email) {
     return (
@@ -38,25 +40,45 @@ export default function GravatarProfile() {
   }
 
   return (
-    <div style={{ padding: "2rem", textAlign: "center" }}>
-      <h2>Profile for {email}</h2>
+    <div className={styles.profile}>
+      <h2 className={styles["profile__title"]}>Welcome, {email}</h2>
       {gravatarUrl && (
-        <img src={gravatarUrl} width={100} height={100} alt="gravatar" />
+        <img
+          src={gravatarUrl}
+          width={100}
+          height={100}
+          alt="Gravatar"
+          className={styles["profile__avatar"]}
+        />
       )}
 
       {githubUser && (
-        <div style={{ marginTop: "1rem" }}>
+        <div className={styles["profile__github"]}>
           <h3>GitHub Match</h3>
-          <img src={githubUser.avatar_url} width={80} alt="GitHub Avatar" />
+          <img
+            src={githubUser.avatar_url}
+            width={80}
+            alt="GitHub Avatar"
+            className={styles["profile__github-avatar"]}
+          />
           <p>{githubUser.login}</p>
-          <a href={githubUser.html_url} target="_blank" rel="noreferrer">
+          <a
+            href={githubUser.html_url}
+            target="_blank"
+            rel="noreferrer"
+            className={styles["profile__link"]}
+          >
             View GitHub
           </a>
         </div>
       )}
 
-      <div style={{ marginTop: "2rem" }}>
-        <Link to="/">Back to Login</Link>
+      <button onClick={handleEnterApp} className={styles["profile__enter"]}>
+        Enter App
+      </button>
+
+      <div className={styles["profile__back"]}>
+        <Link to="/gravatar-auth">Back to Login</Link>
       </div>
     </div>
   );
