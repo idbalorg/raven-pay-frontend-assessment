@@ -10,7 +10,7 @@ function OrderBook({ symbol = "BTCUSDT" }) {
   const fetchOrderBook = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/depth?symbol=${symbol}&limit=${limit}`
+        `/.netlify/functions/depth?symbol=${symbol}&limit=${limit}`
       );
       setBids(res.data.bids || []);
       setAsks(res.data.asks || []);

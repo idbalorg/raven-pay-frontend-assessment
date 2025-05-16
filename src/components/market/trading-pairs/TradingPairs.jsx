@@ -16,8 +16,8 @@ function TradingPairs({ onSelect }) {
     const fetchData = async () => {
       try {
         const [tickerRes, infoRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/ticker"),
-          axios.get("http://localhost:5000/api/exchangeInfo"),
+          axios.get("/.netlify/functions/ticker"),
+          axios.get("/.netlify/functions/exchangeInfo"),
         ]);
 
         setTickers(tickerRes.data);
@@ -54,7 +54,7 @@ function TradingPairs({ onSelect }) {
   };
 
   const getAssetIcon = (asset) =>
-    `https://cryptoicons.org/api/icon/${asset.toLowerCase()}/32`;
+    `/.netlify/functions/icon/${asset.toLowerCase()}/32`;
 
   const filtered = tickers
     .filter((pair) => filterByTab(pair.symbol))

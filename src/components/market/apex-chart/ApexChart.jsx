@@ -21,7 +21,7 @@ export const ApexChart = ({ coin }) => {
     setError("");
 
     fetch(
-      `http://localhost:5000/api/klines?symbol=${symbol}&interval=${fetchInterval}&limit=100`
+      `/.netlify/functions/klines?symbol=${symbol}&interval=${fetchInterval}&limit=100`
     )
       .then((res) => res.json())
       .then((data) => {
