@@ -1,0 +1,9 @@
+.chartContainer {
+  display: flex;
+  flex-direction: column;
+
+  &__group {
+    display: flex;
+    flex-direction: row;
+  }
+}

@@ -20,16 +20,6 @@ app.get("/api/depth", async (req, res) => {
   res.json(response.data);
 });
 
-// app.get("/api/klines", async (req, res) => {
-//   // const { symbol = "BTCUSDT", interval = "1m" } = req.query;
-//   const { symbol = "BTCUSDT", interval = "1h", limit = 200 } = req.query;
-
-//   const response = await axios.get(
-//     `${BINANCE_API}/klines?symbol=${symbol}&interval=${interval}`
-//   );
-//   res.json(response.data);
-// });
-
 app.get("/api/klines", async (req, res) => {
   const { symbol = "BTCUSDT", interval = "1h", limit = 200 } = req.query;
 
@@ -41,6 +31,18 @@ app.get("/api/klines", async (req, res) => {
   } catch (error) {
     console.error("Binance klines error:", error.message);
     res.status(500).json({ error: "Failed to fetch klines from Binance" });
+  }
+});
+
+app.get("/api/exchangeInfo", async (req, res) => {
+  try {
+    const response = await axios.get(
+      "https://api.binance.com/api/v3/exchangeInfo"
+    );
+    res.json(response.data);
+  } catch (error) {
+    console.error("Error fetching exchangeInfo:", error.message);
+    res.status(500).send("Failed to fetch exchange info");
   }
 });
 

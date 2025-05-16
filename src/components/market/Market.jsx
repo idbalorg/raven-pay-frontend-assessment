@@ -4,20 +4,24 @@ import { ApexChart } from "./apex-chart/ApexChart";
 import OrderBook from "./order-book/OrderBook";
 import BuySellOrder from "../buy-sell-order/BuySellOrder";
 
+import styles from "./Market.module.scss";
+import OrdersPanel from "../order-panel/OrderPanel";
+
 export default function Markets() {
   const [selectedCoin, setSelectedCoin] = useState(null);
 
   return (
     <div>
-      <h2>Markets</h2>
-
       <TradingPairs onSelect={setSelectedCoin} />
       {selectedCoin && (
-        <>
-          <ApexChart coin={selectedCoin} />
-          <OrderBook />
-          <BuySellOrder />
-        </>
+        <div className={styles.chartContainer}>
+          <div className={styles["chartContainer__group"]}>
+            <ApexChart coin={selectedCoin} />
+            <OrderBook />
+            <BuySellOrder />
+          </div>
+          <OrdersPanel />
+        </div>
       )}
     </div>
   );

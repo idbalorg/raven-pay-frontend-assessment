@@ -3,8 +3,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #fff;
   border-bottom: 2px solid #ccc;
+  background-color: #000;
 
   &__logo {
     flex: 1;
@@ -43,12 +43,13 @@
 
   &__link {
     text-decoration: none;
-    color: #000;
+    color: #a7b1bc;
     font-weight: normal;
+    font-family: "";
   }
 
   &__link--active {
-    color: #0d6efd;
+    color: #ffffff;
     font-weight: bold;
   }
 

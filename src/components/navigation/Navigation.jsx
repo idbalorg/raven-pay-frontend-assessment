@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { FaBars } from "react-icons/fa"; // Import the hamburger icon
+import md5 from "blueimp-md5";
+import { FaBars } from "react-icons/fa";
 import styles from "./Navigation.module.scss";
 import logo from "/random-task.svg";
 
@@ -9,13 +10,24 @@ function Navigation() {
   const currentPath = location.pathname;
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for toggling menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const storedUser = localStorage.getItem("user");
+  const user = storedUser ? JSON.parse(storedUser) : null;
+
+  const gravatarFallback = user?.email
+    ? `https://www.gravatar.com/avatar/${md5(
+        user.email.trim().toLowerCase()
+      )}?d=identicon`
+    : null;
+
+  const avatarUrl = user?.avatar_url || gravatarFallback;
 
   const links = [
-    { label: "Dashboard", to: "/dashboard" },
-    { label: "Markets", to: "/markets" },
-    { label: "Wallet", to: "/wallet" },
-    { label: "Profile", to: "/profile" },
+    { label: "Dashboard", to: "/app/dashboard" },
+    { label: "Markets", to: "/app/markets" },
+    { label: "Wallet", to: "/app/wallet" },
+    { label: "", to: "/app/profile", hasAvatar: true },
   ];
 
   const handleSearchChange = (e) => {
@@ -23,7 +35,7 @@ function Navigation() {
   };
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen); // Toggle the menu visibility
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
@@ -42,7 +54,6 @@ function Navigation() {
         />
       </div>
 
-      {/* Hamburger Icon from React Icons */}
       <div className={styles.navigation__hamburger} onClick={toggleMenu}>
         <FaBars size={30} />
       </div>
@@ -63,6 +74,17 @@ function Navigation() {
               }`}
             >
               {link.label}
+
+              {link.hasAvatar && avatarUrl && (
+                <img
+                  src={avatarUrl}
+                  alt="User Avatar"
+                  className={styles["navigation__avatar"]}
+                  width={32}
+                  height={32}
+                  style={{ borderRadius: "50%", marginLeft: 8 }}
+                />
+              )}
             </Link>
           </li>
         ))}
